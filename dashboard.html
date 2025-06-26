@@ -37,6 +37,14 @@
   </style>
 </head>
 <body>
+  <script>
+  const currentUser = localStorage.getItem("currentUser");
+  if (!currentUser) {
+    alert("Zugriff verweigert. Bitte zuerst anmelden.");
+    window.location.href = "index.html";
+  }
+</script>
+
 
   <h1>Willkommen bei der besten WG der Welt! 🎉📣🤗❤️</h1>
 
