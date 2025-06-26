@@ -1,8 +1,18 @@
+const currentUser = localStorage.getItem("currentUser");
+
+if (!currentUser) {
+  alert("Bitte zuerst einloggen!");
+  window.location.href = "index.html";
+}
+
+document.getElementById("userLabel").textContent = `Angemeldet als: ${currentUser}`;
+
+
 const users = ["Rajko", "Tinkara", "Daniel", "Magda", "Nina"];
 const tasks = ["Bad", "Küche", "Klos", "Aufwaschen", "Staubsaugen"];
 const totalWeeks = 5; // vergangene Woche + aktuelle + 3 zukünftige
 
-const currentUser = localStorage.getItem("currentUser");
+// const currentUser = localStorage.getItem("currentUser");
 
 if (!currentUser) {
   alert("Bitte zuerst einloggen!");
