@@ -1,28 +1,18 @@
-//const currentUser = localStorage.getItem("currentUser");
-
-//if (!currentUser) {
-//  alert("Bitte zuerst einloggen!");
-//  window.location.href = "index.html";
-//}
-
-document.getElementById("userLabel").textContent = `Angemeldet als: ${currentUser}`;
-
-
 const users = ["Rajko", "Tinkara", "Daniel", "Magda", "Nina"];
 const tasks = ["Bad", "Küche", "Klos", "Aufwaschen", "Staubsaugen"];
-const totalWeeks = 5; // vergangene Woche + aktuelle + 3 zukünftige
+const totalWeeks = 5;
 
-// const currentUser = localStorage.getItem("currentUser");
-
+const currentUser = localStorage.getItem("currentUser");
 if (!currentUser) {
   alert("Bitte zuerst einloggen!");
   window.location.href = "index.html";
 }
+
 document.getElementById("userLabel").textContent = `Angemeldet als: ${currentUser}`;
 
 function getLastMonday() {
   const today = new Date();
-  const day = today.getDay(); // 0=So, 1=Mo
+  const day = today.getDay();
   const diffToLastMonday = day === 0 ? -6 - 7 : 1 - day - 7;
   const lastMonday = new Date(today);
   lastMonday.setDate(today.getDate() + diffToLastMonday);
@@ -57,32 +47,39 @@ for (let w = 0; w < totalWeeks; w++) {
 
   const rotatedTasks = [...tasks.slice(w % tasks.length), ...tasks.slice(0, w % tasks.length)];
 
-  const listItems = users.map((user, i) => {
+  weekDiv.innerHTML = `<h2>Woche von ${formatDate(weekStart)} bis ${formatDate(weekEnd)}</h2><ul></ul>`;
+  const ul = weekDiv.querySelector("ul");
+
+  users.forEach((user, i) => {
     const task = rotatedTasks[i];
-    const taskId = `w${w - 1}_u${i}`;
+    const taskId = `w${w}_u${i}`;
     const isCurrentUser = user === currentUser;
-    const checked = localStorage.getItem(taskId) === "true";
 
-    return `
-      <li>
-        <span class="task-label"><strong>${user}:</strong> ${task}</span>
-        <input type="checkbox" id="${taskId}" ${checked ? "checked" : ""} ${!isCurrentUser || isPast ? "disabled" : ""}>
-        <span id="${taskId}_done" class="task-complete" style="display:${checked ? "inline" : "none"};">✔️</span>
-      </li>
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span class="task-label"><strong>${user}:</strong> ${task}</span>
+      <input type="checkbox" id="${taskId}" ${!isCurrentUser || isPast ? "disabled" : ""}>
+      <span id="${taskId}_done" class="task-complete">✔️</span>
     `;
-  }).join("");
 
-  weekDiv.innerHTML = `
-    <h2>Woche von ${formatDate(weekStart)} bis ${formatDate(weekEnd)}</h2>
-    <ul>${listItems}</ul>
-  `;
+    const checkbox = li.querySelector("input");
+    const checkmark = li.querySelector(".task-complete");
+    checkmark.style.display = "none";
+
+    // Firebase: Lade den Status
+    firebase.database().ref("tasks/" + taskId).on("value", (snapshot) => {
+      const checked = snapshot.val() === true;
+      checkbox.checked = checked;
+      checkmark.style.display = checked ? "inline" : "none";
+    });
+
+    // Bei Änderung → Firebase speichern
+    checkbox.addEventListener("change", () => {
+      firebase.database().ref("tasks/" + taskId).set(checkbox.checked);
+    });
+
+    ul.appendChild(li);
+  });
+
   container.appendChild(weekDiv);
 }
-
-document.querySelectorAll("input[type='checkbox']").forEach(cb => {
-  cb.addEventListener("change", function () {
-    localStorage.setItem(this.id, this.checked);
-    const checkmark = document.getElementById(this.id + "_done");
-    if (checkmark) checkmark.style.display = this.checked ? "inline" : "none";
-  });
-});
