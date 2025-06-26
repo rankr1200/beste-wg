@@ -51,6 +51,14 @@
   <a href="putzplan.html">🧹 Putzplan</a>
   <a href="einkaufsliste.html">🛒 Einkaufsliste</a>
 
+<button onclick="logout()">🚪 Abmelden</button>
+
+<script>
+  function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "index.html";
+  }
+</script>
 
 </body>
 </html>
