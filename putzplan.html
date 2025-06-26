@@ -16,4 +16,12 @@
 
   <script src="js/putzplan.js"></script>
 </body>
+  <script>
+  const currentUser = localStorage.getItem("currentUser");
+  if (!currentUser) {
+    alert("Bitte zuerst einloggen!");
+    window.location.href = "index.html";
+  }
+</script>
+
 </html>
