@@ -22,7 +22,7 @@ function login() {
 
     // 2 Sekunden warten, dann Seite wechseln
     setTimeout(() => {
-      //localStorage.setItem("currentUser", user); // optional
+      localStorage.setItem("currentUser", user);
       window.location.href = "dashboard.html";
     }, 2000);
   } else {
