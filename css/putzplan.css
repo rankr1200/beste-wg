@@ -1,0 +1,87 @@
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f5f9fc;
+  padding: 40px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #14b8a6;
+  margin-bottom: 30px;
+}
+
+#userLabel {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.week {
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #e0f7ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
+}
+
+.week h2 {
+  color: #0f766e;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.past-week {
+  background: #eeeeee;
+  border-left: 5px solid #e11d48;
+  opacity: 0.8;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.task-label {
+  font-weight: 500;
+  flex: 1;
+  color: #374151;
+}
+
+.task-complete {
+  font-size: 1.2em;
+  color: #16a34a;
+  margin-left: 10px;
+  opacity: 0.9;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #14b8a6;
+  transition: transform 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
