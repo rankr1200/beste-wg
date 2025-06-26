@@ -4,7 +4,28 @@
   <meta charset="UTF-8">
   <title>Putzplan</title>
   <link rel="stylesheet" href="css/putzplan.css">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBuz4LJjLUo6n3mYPfdU_QtLUxaWukhuV8",
+      authDomain: "putzplan-31331.firebaseapp.com",
+      databaseURL: "https://putzplan-31331-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "putzplan-31331",
+      storageBucket: "putzplan-31331.firebasestorage.app",
+      messagingSenderId: "424525264223",
+      appId: "1:424525264223:web:0283f25003f16fe023b2ea"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="js/putzplan.js" defer></script>
 </head>
+
 <body>
   <script>
   const currentUser = localStorage.getItem("currentUser");
