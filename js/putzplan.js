@@ -1,9 +1,9 @@
-const currentUser = localStorage.getItem("currentUser");
+//const currentUser = localStorage.getItem("currentUser");
 
-if (!currentUser) {
-  alert("Bitte zuerst einloggen!");
-  window.location.href = "index.html";
-}
+//if (!currentUser) {
+//  alert("Bitte zuerst einloggen!");
+//  window.location.href = "index.html";
+//}
 
 document.getElementById("userLabel").textContent = `Angemeldet als: ${currentUser}`;
 
